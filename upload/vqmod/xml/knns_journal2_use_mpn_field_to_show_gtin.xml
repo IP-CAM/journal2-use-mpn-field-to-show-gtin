@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification
+	xmlns="https://github.com/vqmod/vqmod"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/vqmod/vqmod https://raw.githubusercontent.com/vqmod/vqmod/master/vqmod.xsd"
+	>
+	<id><![CDATA[[VQMOD] Journal 2 - Advanced Opencart Theme: Use MPN field to show product's "GTIN" code]]></id>
+	<version>1.0.0</version>
+	<vqmver>2.6.3</vqmver>
+	<author>kanenas.net (aka Nikolas Branis) - nbran@kanenas.net</author>
+	<file path="admin/language/english/catalog/" name="product.php" error="log">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$_['entry_mpn']              = 'MPN';]]></search>
+			<add><![CDATA[
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) <<
+$_['entry_mpn']              = 'GTIN';
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) <<
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[$_['help_mpn']               = 'Manufacturer Part Number';]]></search>
+			<add><![CDATA[
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) <<
+$_['help_mpn']               = 'Global Trade Item Number';
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) <<
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/language/greek/catalog/" name="product.php" error="log">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$_['entry_mpn']              = 'MPN';]]></search>
+			<add><![CDATA[
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) <<
+$_['entry_mpn']              = 'GTIN';
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) <<
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[$_['help_mpn']               = 'Κωδικός Είδους Κατασκευαστή (Manufacturer Part Number).';]]></search>
+			<add><![CDATA[
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) <<
+$_['help_mpn']               = 'Global Trade Item Number';
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) <<
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/language/english/product/" name="product.php" error="log">
+		<operation error="skip">
+			<search position="before"><![CDATA[$_['text_reward']              = 'Reward Points:';]]></search>
+			<add><![CDATA[
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) <<
+$_['text_gtin']              = 'Product GTIN:';
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) <<
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/language/greek/product/" name="product.php" error="log">
+		<operation error="skip">
+			<search position="before"><![CDATA[$_['text_reward']              = 'Πόντοι Ανταμοιβής:';]]></search>
+			<add><![CDATA[
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) <<
+$_['text_gtin']              = 'GTIN Προϊόντος:';
+// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) <<
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/" name="product.php" error="log">
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['text_reward'] = $this->language->get('text_reward');]]></search>
+			<add><![CDATA[
+			// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) <<
+			$data['text_gtin'] = $this->language->get('text_gtin');
+			// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) <<
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['reward'] = $product_info['reward'];]]></search>
+			<add><![CDATA[
+			// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) <<
+			$data['mpn'] = $product_info['mpn'];
+			// kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) <<
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/journal2/template/product/" name="product.tpl" error="log">
+		<operation error="skip">
+			<search position="after"><![CDATA[<li class="p-model"><?php echo $text_model; ?> <span class="p-model" itemprop="model"><?php echo $model; ?></span></li>]]></search>
+			<add><![CDATA[
+            <?php // kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (start) << ?>
+              <?php if ($mpn) { ?>
+                <li class="knns-gtin"><?php echo $text_gtin; ?><span class="knns-gtin"><?php echo $mpn; ?></span></li>
+              <?php } ?>
+            <?php // kanenas: knns_journal2_use_mpn_field_to_show_gtin.xml (end) << ?>
+			]]></add>
+		</operation>
+	</file>
+</modification>
